@@ -3,7 +3,7 @@ import { internalError, httpStatus } from '@/constants/errors'
 import { type Response } from 'express'
 import { type Error } from '@/types/error'
 
-const appAbbr = 'services-api'
+const appAbbr = 'orders-api'
 
 const errorResponses = (res: Response, data: Error, label: string): Response => {
   // In case an error not intentionally created by developer

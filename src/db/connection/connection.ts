@@ -3,10 +3,10 @@ import logger from '@/utils/logger'
 import { host, user, password, database, port } from './config'
 import { dbError } from '@/constants/errors'
 import { InternalError, ConflictError } from '@/utils/httpErrors'
-import { type InternetService } from '@/types/services'
+import { type Order } from '@/types/order'
 
 export interface GenericQueryResult extends QueryResult {
-  rows: InternetService[]
+  rows: Order[]
 }
 
 const pool = new Pool({
