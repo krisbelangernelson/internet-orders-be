@@ -10,9 +10,8 @@ interface LoggingType {
 
 export interface ServerConfigType {
   port: number
-  debug: boolean
   basePath: string
   email: string
   logging: LoggingType
-  cors: Record<string, string>
+  cors: Record<string, string | boolean>
 }
