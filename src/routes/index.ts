@@ -12,8 +12,7 @@ router.get('/version', (_req, res) => {
   return res.send(`Version: ${version}`)
 })
 
-router.post('/api/v1/create-order', verifyOrder, createOrder)
-// router.get('/api/v1/order/customer/:id', getOrderByCustomerId)
+router.post('/api/v1/order', verifyOrder, createOrder)
 router.use('/api/v1/stripe', stripe)
 router.use('*', invalidRoutes)
 
