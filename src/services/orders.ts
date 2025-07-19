@@ -1,7 +1,7 @@
 import type { CreateOrder } from '@/types/order'
-import { insertOrder } from '@/db/queries/orders'
+import type { OrderModel } from '@/models/pg'
 
-export const createOrder = async (body: CreateOrder): Promise<object> => {
-  await insertOrder(body)
-  return { code: '0' }
+export const createOrder = (orderModel: OrderModel) => async (body: CreateOrder) => {
+  const order = await orderModel.create(body)
+  return order
 }

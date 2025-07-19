@@ -1,7 +1,7 @@
 import { getDb } from '@/db/connection'
 import type { Order, CreateOrder } from '@/types/order'
 
-export const insertOrder = async (params: CreateOrder): Promise<void> => {
+export const insertOrder = async (params: CreateOrder): Promise<Order> => {
   const { offerId, line1, line2, city, state, postal_code: postalCode, customerId } = params
 
   const db = getDb()
@@ -15,7 +15,7 @@ export const insertOrder = async (params: CreateOrder): Promise<void> => {
       service_postal_code,
       state
     )
-    VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id`
+    VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`
 
   const values = [
     offerId.trim(),
@@ -27,7 +27,8 @@ export const insertOrder = async (params: CreateOrder): Promise<void> => {
     '2'
   ]
 
-  await db.query(sql, values, `createCustomer: DB error inserting customer.`)
+  const results = await db.query(sql, values, `createCustomer: DB error inserting customer.`)
+  return results.rows[0]
 }
 
 export const findOrderByCustomerId = async (id): Promise<Order[]> => {
